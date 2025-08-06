@@ -22,31 +22,25 @@ jobs:
       aws-region: ${{ secrets.AWS_REGION }}
       aws-statefile-s3-bucket: ${{ secrets.AWS_STATEFILE_S3_BUCKET }}
       aws-lock-dynamodb-table: ${{ secrets.AWS_LOCK_DYNAMODB_TABLE }}
-    #   db-username: ${{ secrets.DB_USERNAME }}
-    #   db-password: ${{ secrets.DB_PASSWORD }}
 
-#   deploy-uat:
-#     needs: deploy-dev
-#     uses: ./.github/workflows/terraform-base.yml
-#     with:
-#       environment: uat
-#     secrets:
-#       aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
-#       aws-region: ${{ secrets.AWS_REGION }}
-#       aws-statefile-s3-bucket: ${{ secrets.AWS_STATEFILE_S3_BUCKET }}
-#       aws-lock-dynamodb-table: ${{ secrets.AWS_LOCK_DYNAMODB_TABLE }}
-#       db-username: ${{ secrets.DB_USERNAME }}
-#       db-password: ${{ secrets.DB_PASSWORD }}
+  deploy-uat:
+    needs: deploy-dev
+    uses: ./.github/workflows/terraform-base.yml
+    with:
+      environment: uat
+    secrets:
+      aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
+      aws-region: ${{ secrets.AWS_REGION }}
+      aws-statefile-s3-bucket: ${{ secrets.AWS_STATEFILE_S3_BUCKET }}
+      aws-lock-dynamodb-table: ${{ secrets.AWS_LOCK_DYNAMODB_TABLE }}
 
-#   deploy-prd:
-#     needs: deploy-uat
-#     uses: ./.github/workflows/terraform-base.yml
-#     with:
-#       environment: prd
-#     secrets:
-#       aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
-#       aws-region: ${{ secrets.AWS_REGION }}
-#       aws-statefile-s3-bucket: ${{ secrets.AWS_STATEFILE_S3_BUCKET }}
-#       aws-lock-dynamodb-table: ${{ secrets.AWS_LOCK_DYNAMODB_TABLE }}
-#       db-username: ${{ secrets.DB_USERNAME }}
-#       db-password: ${{ secrets.DB_PASSWORD }}
+  deploy-prd:
+    needs: deploy-uat
+    uses: ./.github/workflows/terraform-base.yml
+    with:
+      environment: prd
+    secrets:
+      aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
+      aws-region: ${{ secrets.AWS_REGION }}
+      aws-statefile-s3-bucket: ${{ secrets.AWS_STATEFILE_S3_BUCKET }}
+      aws-lock-dynamodb-table: ${{ secrets.AWS_LOCK_DYNAMODB_TABLE }}
